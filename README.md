@@ -113,8 +113,8 @@ Non-trainable params: 0
 ```
 Final Metrics Summary (Test Set)
 Model               |     RMSE   |   MAE    |  MAPE
-Seq2Seq (Baseline)  |    0.0987  |  0.0743  | 9.82%
-Seq2Seq + Attention |    0.0842  |  0.0615  |  7.34%
+Seq2Seq (Baseline)  |    0.1019  |  0.0831  | 18.52%
+Seq2Seq + Attention |    0.0774  |  0.0623  | 13.07%
 ```
 
 > Attention helps the model focus on important encoder time steps, improving both accuracy and interpretability.
@@ -194,6 +194,7 @@ git push origin main
 - NumPy 1.x
 - Scikit-learn
 - Matplotlib
+
 
 
 
