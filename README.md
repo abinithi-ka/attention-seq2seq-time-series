@@ -181,4 +181,10 @@ git commit -m "Update README with model outputs and images"
 git push origin main
 ```
 
+## Environment
+- Python 3.9
+- TensorFlow 2.x
+- NumPy 1.x
+- Scikit-learn
+- Matplotlib
 
