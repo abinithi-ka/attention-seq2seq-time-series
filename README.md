@@ -124,3 +124,19 @@ python 06_walk_forward_validation.py
 python 07_evaluation.py
 python 08_visualization.py
 Ensure data/raw and data/processed exist (even as empty placeholders)
+
+```
+🔑 Key Takeaways
+
+Attention improves forecast accuracy in multi-step time series
+
+Walk-forward validation provides realistic error estimation
+
+Attention weights provide interpretability
+
+📄 References
+
+Bahdanau, D., Cho, K., & Bengio, Y. (2015). Neural Machine Translation by Jointly Learning to Align and Translate
+
+Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning
+
