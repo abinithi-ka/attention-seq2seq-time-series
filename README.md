@@ -9,17 +9,16 @@ This project explores **multi-step time series forecasting** using:
 Walk-forward validation is used for realistic evaluation of the models.
 
 ---
-
 ## 📂 Repository Structure
-
+```
 attention-seq2seq-time-series/
-│
 ├── code/ # Python scripts
 ├── data/ # Data folders (placeholders only)
 ├── images/ # Screenshots of plots
 ├── README.md # Project explanation & results
 └── .gitignore
 
+```
 
 - **code/** contains all scripts:
   - `01_data_generation.py` → Synthetic dataset
@@ -181,3 +180,4 @@ git add README.md
 git commit -m "Update README with model outputs and images"
 git push origin main
 ```
+
