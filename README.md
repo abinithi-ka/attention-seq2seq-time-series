@@ -16,13 +16,13 @@ attention-seq2seq-time-series/
 │
 ├── code/ # Python scripts
 ├── data/ # Data folders (placeholders only)
-├── images/ # Optional screenshots
-├── README.md # This file
+├── images/ # Screenshots of plots
+├── README.md # Project explanation & results
 └── .gitignore
 
 
 - **code/** contains all scripts:
-  - `01_data_generation.py` → Synthetic multivariate dataset
+  - `01_data_generation.py` → Synthetic dataset
   - `02_preprocessing.py` → Train/val/test split & scaling
   - `03_baseline_arima.py` → ARIMA baseline model
   - `04_baseline_seq2seq.py` → Vanilla Seq2Seq model
@@ -40,7 +40,7 @@ attention-seq2seq-time-series/
 ## 📝 Project Overview
 
 ### Objective
-To compare **vanilla Seq2Seq** vs **Seq2Seq with Attention** for time series forecasting, and validate if attention improves accuracy and interpretability.
+Compare **vanilla Seq2Seq** vs **Seq2Seq with Attention** for multi-step time series forecasting and see if attention improves accuracy and interpretability.
 
 ### Dataset
 - Synthetic multivariate time series of **daily energy demand**
@@ -48,58 +48,86 @@ To compare **vanilla Seq2Seq** vs **Seq2Seq with Attention** for time series for
   1. Temperature (annual sinusoidal + noise)
   2. Humidity (weekly cycle)
   3. Industrial load (volatility + trend)
-- Target: `energy_demand` (weighted mixture of features)
-- Split into **train, validation, test** sets in temporal order
+- Target: `energy_demand` (weighted mixture)
+- Train/validation/test split in **temporal order**.
 
 ### Preprocessing
-- Scaling features to stabilize training
+- Feature scaling
 - Sliding windows for sequence modeling
-- Decoder inputs prepared for **teacher forcing**
+- Teacher-forcing for decoder inputs
 
 ---
 
 ## 🧠 Models Implemented
 
 1. **ARIMA** → Baseline linear model  
-2. **Seq2Seq LSTM (Vanilla)** → Encoder-decoder predicts multi-step  
-3. **Seq2Seq with Bahdanau Attention** → Focuses on important time steps, improves accuracy, adds interpretability
+2. **Seq2Seq LSTM (Vanilla)** → Encoder-decoder, multi-step forecast  
+3. **Seq2Seq + Bahdanau Attention** → Focuses on important time steps, improves accuracy and interpretability
 
 ---
 
 ## 🛠 Hyperparameters
 
 - Hidden units: 64
-- Attention units: 32 (tuned)
-- Learning rate: 0.0005 (tuned)
+- Attention units: 32
+- Learning rate: 0.0005
 - Batch size: 32
 - Epochs: 10
-- Output steps: 14
 - Input steps: 60
+- Output steps: 14
 
 ---
 
-## 📊 Walk-forward Validation
+## 📊 Model Evaluations
 
-- Stepwise multi-step forecasting
-- Evaluates **accumulated errors** over time
-- More realistic than static test evaluation
+### ARIMA Baseline
 
-### Metrics Collected
+- RMSE: 8.736  
+- MAE: 7.243  
+- MAPE: 12.37%  
 
-| Model                  | RMSE    | MAE    | MAPE   |
-|------------------------|--------|--------|--------|
-| Seq2Seq (Baseline)     | 0.0987 | 0.0743 | 9.82%  |
-| Seq2Seq + Attention    | 0.0842 | 0.0615 | 7.34%  |
+> ARIMA shows high errors because it only uses the target series and cannot capture multivariate interactions or long-term seasonality.
+
+### Seq2Seq LSTM Baseline
+
+- RMSE: 0.065  
+- MAE: 0.052  
+- MAPE: 11.19%  
+
+**Model summary:**
+Model: "functional_24"
+Total params: 38,882
+Trainable params: 38,882
+Non-trainable params: 0
+
+
+### Seq2Seq + Attention
+
+- RMSE: 0.066  
+- MAE: 0.052  
+- MAPE: 10.79%  
+
+**Walk-forward validation results:**
+- Baseline: RMSE 0.1019, MAE 0.0831, MAPE 18.52%  
+- Attention: RMSE 0.0774, MAE 0.0623, MAPE 13.07%
+
+> Attention helps the model focus on important encoder time steps, improving both accuracy and interpretability.
 
 ---
 
 ## 📈 Visualizations
 
-- Forecast vs True plots
-- Attention heatmaps highlighting important encoder time steps
+- **Forecast vs True**:  
+![Forecast Comparison](images/3.Forecast Comparison - First 50 Steps_07.png)
 
-![Forecast Example](images/forecast_sample.png)
-![Attention Heatmap](images/attention_heatmap.png)
+- **Attention Heatmap**:  
+![Attention Heatmap](images/1.Attention heatmap for first test sample_05.png)
+
+- **Walk-forward Samples**:  
+![Walk-forward Samples](images/2.Walk-forward Samples_06.png)
+
+- **Error Distribution**:  
+![Error Distribution](images/4.Error Distribution (Seq2Seq + Attention)_08.png)
 
 ---
 
@@ -110,10 +138,13 @@ To compare **vanilla Seq2Seq** vs **Seq2Seq with Attention** for time series for
 ```bash
 git clone https://github.com/abinithi-ka/attention-seq2seq-time-series.git
 cd attention-seq2seq-time-series/code
-Install requirements:
+```
+
+2. Install requirements:
 
 pip install -r requirements.txt
-Run scripts in order:
+
+3. Run scripts in order :
 
 python 01_data_generation.py
 python 02_preprocessing.py
@@ -123,14 +154,14 @@ python 05_attention_seq2seq.py
 python 06_walk_forward_validation.py
 python 07_evaluation.py
 python 08_visualization.py
-Ensure data/raw and data/processed exist (even as empty placeholders)
 
-```
+Ensure data/raw and data/processed exist (even as empty placeholders).
+
 🔑 Key Takeaways
 
-Attention improves forecast accuracy in multi-step time series
+Attention improves forecast accuracy in multi-step series
 
-Walk-forward validation provides realistic error estimation
+Walk-forward validation gives realistic error estimation
 
 Attention weights provide interpretability
 
@@ -140,3 +171,13 @@ Bahdanau, D., Cho, K., & Bengio, Y. (2015). Neural Machine Translation by Jointl
 
 Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning
 
+
+---
+
+### ✅ **Step 3: Push the updated README to GitHub**
+
+```bash
+git add README.md
+git commit -m "Update README with model outputs and images"
+git push origin main
+```
