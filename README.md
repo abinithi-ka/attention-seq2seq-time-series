@@ -116,17 +116,17 @@ Non-trainable params: 0
 
 ## 📈 Visualizations
 
-- **Forecast vs True**:  
-![Forecast Comparison](images/3.Forecast Comparison - First 50 Steps_07.png)
+**Forecast vs True**:  
+![Forecast Comparison](images/forecast_comparison_07.png)
 
-- **Attention Heatmap**:  
-![Attention Heatmap](images/1.Attention heatmap for first test sample_05.png)
+**Attention Heatmap**:  
+![Attention Heatmap](images/attention_heatmap_05.png)
 
-- **Walk-forward Samples**:  
-![Walk-forward Samples](images/2.Walk-forward Samples_06.png)
+**Walk-forward Samples**:  
+![Walk-forward Samples](images/walk_forward_samples_06.png)
 
-- **Error Distribution**:  
-![Error Distribution](images/4.Error Distribution (Seq2Seq + Attention)_08.png)
+**Error Distribution**:  
+![Error Distribution](images/error_distribution_08.png)
 
 ---
 
@@ -180,4 +180,5 @@ git add README.md
 git commit -m "Update README with model outputs and images"
 git push origin main
 ```
+
 
